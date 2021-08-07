@@ -1,5 +1,5 @@
 node_modules
 sample-project/node_modules
 sample-project/www
-dist
+dist/index.*
 .DS_Store

@@ -8,7 +8,7 @@ This package is intended to make caching easier for Angular HttpClient calls. It
 In the code where you are using `HttpClient` add the following import:
 
 ```typescript
-import { CacheObserver, CacheOptions, CacheStrategy, CacheStorageProvider } from 'rx-cache-observer';`
+import { CacheObserver, CacheOptions, CacheStrategy } from 'rx-cache-observer';`
 ```
 
 Lets add caching to this API call:
@@ -34,7 +34,6 @@ Now, whenever our api call to `getJoke` is made it will get a joke from the serv
 - __key__ - This is a unique string to identify the cached data. For example if your api gets orders then you can name this `orders`. If there are multiple
 - __observable_ - This is the observable you want to cache values from. Typically this will be for `get` API calls.
 - __options__ - This is an optional parameter of type `CacheOptions` which specifies how values are cached.
-- __storageProvider__ - This is an optional parameter of type `CacheStorageProvider` (see below)
 
 ## Caching Options
 Here are some examples of CacheOptions you can use:
@@ -80,38 +79,5 @@ Return cached data if not requested in 30 seconds.
   ```typescript
   public getJoke(): Observable<any> {
     return CacheObserver(url, this.httpClient.get('https://api.chucknorris.io/jokes/random'), { expiresMs: 30000 });
-  }
-  ```
-
-## Creating a Custom Storage Provider
-If a cache storage provider is not specified then cached values are stored in memory. 
-  
-A custom `CacheStorageProvider` can be created to provide an alternative way of storing cached values. The below example shows how to store values in local storage.
-
-  ```typescript
-  private storageProvider: CacheStorageProvider = {
-      readValue: this.read,
-      writeValue: this.write
-  };;
-
-  read(key: string): CacheValue {
-    try {
-      return JSON.parse(localStorage[key]);
-    } catch {
-      return undefined;
-    }
-  }
-
-  write(key: string, value: CacheValue) {
-    localStorage[key] = JSON.stringify(value);
-  }
-
-  public getJoke(): Observable<any> {
-    return CacheObserver(
-      'joke',
-      this.httpClient.get('https://api.chucknorris.io/jokes/random'), 
-      CacheStrategy.OneMinute, 
-      this.storageProvider)
-      ;
   }
   ```
