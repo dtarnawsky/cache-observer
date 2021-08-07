@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      API Cache
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-radio-group (ionChange)="setStrategy($event)" value="none">
+      <ion-list-header>
+        <ion-label>Caching Strategy</ion-label>
+      </ion-list-header>
+  
+      <ion-item>
+        <ion-label>5 Seconds</ion-label>
+        <ion-radio slot="start" value="5secs"></ion-radio>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Fresh (Cached and fresh value)</ion-label>
+        <ion-radio slot="start" value="fresh"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fresh (Cached and fresh if not duplicate)</ion-label>
+        <ion-radio slot="start" value="freshdup"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>None</ion-label>
+        <ion-radio slot="start" value="none"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-button (click)="getJoke()">Get Joke</ion-button>
+    <ion-button (click)="getPerson()">Get Person</ion-button>
+    <ion-button (click)="message = undefined">Clear</ion-button>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>{{message}}</ion-title>
+  </ion-toolbar>
+</ion-footer>

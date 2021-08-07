@@ -1,0 +1,18 @@
+{
+  "name": "rx-cache-observer",
+  "version": "1.0.0",
+  "author": "Damian Tarnawsky",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "publish": "cp README.md dist && cd dist && npm publish"
+  },
+  "dependencies": {
+    "rxjs": "^6.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
+}
